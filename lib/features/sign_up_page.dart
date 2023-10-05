@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: ForgotPassword(),
+    home: SignupPage(),
   ));
 }
 
-class ForgotPassword extends StatelessWidget {
-  const ForgotPassword({Key? key});
+class SignupPage extends StatelessWidget {
+  const SignupPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
