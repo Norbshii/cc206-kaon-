@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: FigmaToCodeApp(),
+    home: ForgotPassword(),
   ));
 }
 
-class FigmaToCodeApp extends StatelessWidget {
-  const FigmaToCodeApp({Key? key});
+class ForgotPassword extends StatelessWidget {
+  const ForgotPassword({Key? key});
 
   @override
   Widget build(BuildContext context) {
