@@ -1,3 +1,5 @@
+import 'package:cc206_kaon_/components/accept.dart';
+import 'package:cc206_kaon_/features/Log-in_page.dart';
 import 'package:flutter/material.dart';
 
 class SignupPage extends StatelessWidget {
@@ -22,7 +24,7 @@ class SignupPage extends StatelessWidget {
               style: TextStyle(
                 color: Color(0xFF91C789),
                 fontFamily: 'Poppins',
-                fontSize: 40,
+                fontSize: 60,
                 letterSpacing: 0,
                 fontWeight: FontWeight.bold,
                 height: 1,
@@ -41,9 +43,10 @@ class SignupPage extends StatelessWidget {
                   SizedBox(height: 10),
                   buildTextField("PASSWORD"),
                   SizedBox(height: 100),
-                  buildNextButton(),
+                  buildNextButton(context), // Pass the context to the function
                   SizedBox(height: 10),
-                  buildAlreadyHaveAccountText(),
+                  buildAlreadyHaveAccountText(
+                      context), // Pass the context to the function
                 ],
               ),
             ),
@@ -75,12 +78,15 @@ class SignupPage extends StatelessWidget {
     );
   }
 
-  Widget buildNextButton() {
+  Widget buildNextButton(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-          // NEXT PAGE FUNCTION AFTER PRESSING SNG NEXT BUTTON
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SignupAccept()),
+          );
         },
         style: ElevatedButton.styleFrom(
           primary: Color.fromRGBO(145, 199, 137, 1),
@@ -107,7 +113,7 @@ class SignupPage extends StatelessWidget {
     );
   }
 
-  Widget buildAlreadyHaveAccountText() {
+  Widget buildAlreadyHaveAccountText(BuildContext context) {
     return RichText(
       text: TextSpan(
         children: [
@@ -121,16 +127,30 @@ class SignupPage extends StatelessWidget {
               fontWeight: FontWeight.normal,
             ),
           ),
-          TextSpan(
-            text: 'Sign In',
-            style: TextStyle(
-              color: Color.fromRGBO(0, 168, 107, 1),
-              fontFamily: 'Montserrat',
-              fontSize: 16,
-              letterSpacing: 0,
-              fontWeight: FontWeight.bold,
+          WidgetSpan(
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
+                },
+                child: Text(
+                  'Sign In',
+                  style: TextStyle(
+                    color: Color.fromRGBO(0, 168, 107, 1),
+                    fontFamily: 'Montserrat',
+                    fontSize: 16,
+                    letterSpacing: 0,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.white,
+                  ),
+                ),
+              ),
             ),
-            // SIGN IN FUNCTION DIRI NEED
           ),
         ],
       ),
