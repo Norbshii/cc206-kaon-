@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cc206_kaon_/features/Forgot_password_page.dart';
+import 'package:cc206_kaon_/features/Sign-up_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -40,11 +42,53 @@ class LoginPage extends StatelessWidget {
                     SizedBox(height: 20),
                     buildTextField("PASSWORD"),
                     SizedBox(height: 20),
-                    buildLoginButton("LOGIN"),
+                    buildLoginButton("LOGIN", context),
                     SizedBox(height: 20),
-                    buildForgotPasswordText("Forgot password?"),
+                    buildHoverContainer(
+                      "Forgot password?",
+                      () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Forgotpassword(),
+                          ),
+                        );
+                      },
+                    ),
                     SizedBox(height: 20),
-                    buildSignUpText("Don’t have an account?", "Sign Up"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an account?",
+                          style: TextStyle(
+                            color: Color.fromRGBO(35, 25, 26, 1),
+                            fontFamily: 'Montserrat',
+                            fontSize: 16,
+                            letterSpacing: 0,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        buildHoverContainer(
+                          "Sign Up",
+                          () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignupPage(),
+                              ),
+                            );
+                          },
+                          textStyle: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            decoration: TextDecoration.underline,
+                            decorationColor: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -63,7 +107,7 @@ class LoginPage extends StatelessWidget {
                 'Káon',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Color.fromRGBO(18, 20, 30, 1),
+                  color: Color(0xFF91C789),
                   fontFamily: 'Poppins',
                   fontSize: 60,
                   letterSpacing: 0,
@@ -93,67 +137,47 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget buildLoginButton(String buttonText) {
+  Widget buildLoginButton(String buttonText, BuildContext context) {
     return Container(
       width: 300,
       height: 45,
       child: ElevatedButton(
         onPressed: () {
-          // Add your login logic here
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => Afterlogin(),
+          //   ),
+          // );
         },
         child: Text(buttonText),
       ),
     );
   }
 
-  Widget buildForgotPasswordText(String text) {
+  Widget buildHoverContainer(String text, VoidCallback onTap,
+      {TextStyle? textStyle}) {
     return Container(
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: Color.fromRGBO(35, 25, 26, 1),
-          fontFamily: 'Montserrat',
-          fontSize: 16,
-          letterSpacing: 0,
-          fontWeight: FontWeight.normal,
-          height: 1,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: onTap,
+          child: Container(
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: textStyle ??
+                  TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'Montserrat',
+                    fontSize: 16,
+                    letterSpacing: 0,
+                    fontWeight: FontWeight.normal,
+                    height: 1,
+                  ),
+            ),
+          ),
         ),
-      ),
-    );
-  }
-
-  Widget buildSignUpText(String prefixText, String suffixText) {
-    return Container(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(
-            prefixText,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color.fromRGBO(35, 25, 26, 1),
-              fontFamily: 'Montserrat',
-              fontSize: 16,
-              letterSpacing: 0,
-              fontWeight: FontWeight.normal,
-              height: 1,
-            ),
-          ),
-          SizedBox(width: 0),
-          Text(
-            suffixText,
-            textAlign: TextAlign.right,
-            style: TextStyle(
-              color: Color.fromRGBO(255, 255, 255, 1),
-              fontFamily: 'Montserrat',
-              fontSize: 16,
-              letterSpacing: 0,
-              fontWeight: FontWeight.normal,
-              height: 1,
-            ),
-          ),
-        ],
       ),
     );
   }
